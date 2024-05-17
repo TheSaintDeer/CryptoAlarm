@@ -3,11 +3,11 @@ from rest_framework import serializers
 from . import models
 
 
-class TelegramUserSerializer(serializers.ModelSerializer):
+class TelegramChatSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.TelegramUser
-        fields = ['pk', 'telegram_id']
+        model = models.TelegramChat
+        fields = ['pk', 'chat_id', 'timezone']
 
 
 class PairSerializer(serializers.ModelSerializer):
@@ -19,19 +19,19 @@ class PairSerializer(serializers.ModelSerializer):
 
 class AlarmSerializer(serializers.ModelSerializer):
 
-    user = TelegramUserSerializer()
+    user = TelegramChatSerializer()
     pair = PairSerializer()
 
     class Meta:
         model = models.Alarm
-        fields = ['user', 'pair', 'price']
+        fields = ['user', 'pair', 'time']
 
-    def create(self, validated_data):
-        validated_data['user'] = models.TelegramUser.objects.get(
-            telegram_id=validated_data['user']['telegram_id']
-        )
-        validated_data['pair'], isCreated = models.Pair.objects.get_or_create(
-            name=validated_data['pair']['name']
-        )
+    # def create(self, validated_data):
+    #     validated_data['user'] = models.TelegramUser.objects.get(
+    #         chat+_id=validated_data['user']['telegram_id']
+    #     )
+    #     validated_data['pair'], isCreated = models.Pair.objects.get_or_create(
+    #         name=validated_data['pair']['name']
+    #     )
 
-        return super().create(validated_data)
+    #     return super().create(validated_data)

@@ -3,14 +3,19 @@ from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
 
-class TelegramUser(models.Model):
+class TelegramChat(models.Model):
 
-    telegram_id = models.CharField(
-        max_length=10
+    chat_id = models.IntegerField(
+        unique=True
+    )
+    timezone = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True
     )
 
     def __str__(self):
-        return f'{self.telegram_id}'
+        return f'{self.chat_id}'
     
 
 class Pair(models.Model):
@@ -29,17 +34,17 @@ class Pair(models.Model):
 class Alarm(models.Model):
 
     user = models.ForeignKey(
-        'TelegramUser', 
+        'TelegramChat', 
         on_delete=models.CASCADE,
     )
     pair = models.ForeignKey(
         'Pair',
         on_delete=models.CASCADE,
     )
-    price = models.IntegerField()
+    time = models.TimeField()
 
     def __str__(self):
-        return f'{self.user.telegram_id}: {self.pair.name}-{self.price}'
+        return f'{self.user.chat_id}: {self.pair.name}-{self.time}'
 
 
 @receiver(post_delete, sender=Alarm)
