@@ -20,7 +20,8 @@ change_timezone = '''
 You want to change your time zone. Enter a new one in 'GMTYX' format, where Y is + or -, and X is a number.'''
 
 help_answer = '''
-TIMEZONE
+SETTINGS
+/my_id
 /change_timezone
 
 ALARM

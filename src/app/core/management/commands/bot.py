@@ -191,6 +191,10 @@ def update_alarm(message: Message):
     else:
         bot.send_message(message.chat.id, 'You have any alarm.')
 
+@bot.message_handler(commands=['my_id'])
+def print_id(message: Message):
+    bot.send_message(message.chat.id, f'Your chat id is {message.chat.id}')
+
 class Command(BaseCommand):
     help = "Run the bot"
     

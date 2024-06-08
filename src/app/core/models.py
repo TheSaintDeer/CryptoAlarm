@@ -6,7 +6,8 @@ from django.dispatch import receiver
 class TelegramChat(models.Model):
 
     chat_id = models.IntegerField(
-        unique=True
+        unique=True,
+        primary_key=True
     )
     timezone = models.CharField(
         max_length=7,
@@ -28,7 +29,7 @@ class Pair(models.Model):
     )
 
     def __str__(self):
-        return f'{self.name} - {self.isUsed}'
+        return f'{self.name}'
     
 
 class Alarm(models.Model):
