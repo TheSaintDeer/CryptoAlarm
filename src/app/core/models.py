@@ -9,11 +9,6 @@ class TelegramChat(models.Model):
         unique=True,
         primary_key=True
     )
-    timezone = models.CharField(
-        max_length=7,
-        null=True,
-        blank=True
-    )
 
     def __str__(self):
         return f'{self.chat_id}'
@@ -42,10 +37,9 @@ class Alarm(models.Model):
         'Pair',
         on_delete=models.CASCADE,
     )
-    time = models.TimeField()
 
     def __str__(self):
-        return f'{self.user.chat_id}: {self.pair.name}-{self.time}'
+        return f'{self.user.chat_id} - {self.pair.name}'
 
 
 @receiver(post_delete, sender=Alarm)

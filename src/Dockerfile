@@ -4,9 +4,9 @@ RUN apt-get upgrade -y
 
 WORKDIR /src
 
+RUN python -m pip install --upgrade pip
 COPY ./requirements.txt ./
 RUN pip install -r requirements.txt
 COPY ./app ./app
-COPY ./run.sh ./run.sh
 
-CMD ["chmod", "777", "run.sh"]
+CMD ["python3", "./app/manage.py", "runserver", "0.0.0.0:8000"]

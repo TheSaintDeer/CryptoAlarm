@@ -7,7 +7,7 @@ class TelegramChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.TelegramChat
-        fields = ['chat_id', 'timezone']
+        fields = ['chat_id']
 
 
 class PairSerializer(serializers.ModelSerializer):
@@ -23,17 +23,15 @@ class AlarmSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Alarm
-        fields = ['user', 'pair', 'time']
+        fields = ['user', 'pair']
 
     def create(self, validated_data):
         chat = validated_data['user']
         pair, isCreated = models.Pair.objects.get_or_create(
             name=validated_data['pair']['name']
         )
-        time = validated_data['time']
 
         return models.Alarm.objects.create(
             user=chat,
-            pair=pair,
-            time=time
+            pair=pair
         )

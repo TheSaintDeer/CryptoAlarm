@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third-part apps
 
     'rest_framework',
+    'django_celery_beat',
 
     # local apps
 
@@ -139,3 +140,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_KEY="7195856802:AAFwCN2iUPodDixq14g9hLXvf1yvGNo_-a0"
+CELERY_BROKER_URL = 'redis://redis:6379'
