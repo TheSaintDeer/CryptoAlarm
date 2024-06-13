@@ -24,6 +24,4 @@ services:
     restart: always
     build: 
       context: ./src
-    volumes: 
-      - ./cats:/app/src/cats
-    command: ['celery', '--workdir=./app', '-A', 'core', 'worker' ]
+    command: ['celery', '--workdir=./app', '-A', 'app', 'worker', '-B' ]

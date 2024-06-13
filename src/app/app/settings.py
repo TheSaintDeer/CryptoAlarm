@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,3 +142,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_KEY="7195856802:AAFwCN2iUPodDixq14g9hLXvf1yvGNo_-a0"
 CELERY_BROKER_URL = 'redis://redis:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "core.tasks.create_queue_of_msg",
+        "schedule": crontab(),
+    },
+}

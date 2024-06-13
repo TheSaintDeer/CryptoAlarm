@@ -37,7 +37,7 @@ def create_alarm(message: Message):
                     chat_id=message.chat.id
                 )
                 pair, _ = Pair.objects.get_or_create(
-                    name=context[message.chat.id]['pair']
+                    name=message.text
                 )
                 Alarm.objects.create(
                     user=chat,

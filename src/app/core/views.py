@@ -2,12 +2,14 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from . import models, serializers, services
+from .tasks import send_msg
 
 
 class TelegramChatViewSet(viewsets.ModelViewSet):
 
     queryset = models.TelegramChat.objects.all()
     serializer_class = serializers.TelegramChatSerializer
+
 
 class PairViewSet(viewsets.ModelViewSet):
 
