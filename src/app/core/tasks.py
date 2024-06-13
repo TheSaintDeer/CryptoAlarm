@@ -7,12 +7,14 @@ from .models import *
 
 @shared_task
 def send_msg(chat_id, pair, price):
+    '''Send a message to the user about the price'''
     bot.send_message(chat_id, f'Price of {pair} is {price}!')
     return True
 
 
 @shared_task
 def create_queue_of_msg():
+    '''Creates a queue to send messages to users based on pairs of interest to them'''
     for pair in Pair.objects.filter(isUsed=True): 
         for alarm in Alarm.objects.filter(pair=pair):
             price = get_price(pair)['result']['list'][0][4]
